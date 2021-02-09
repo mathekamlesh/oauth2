@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+import  mysql from 'mysql';
 
 const connection = mysql.createConnection({
   host     : process.env.DB_HOST,
@@ -94,4 +94,4 @@ const model = {
   }  
 };
 
-module.exports = model;
+export default model;
