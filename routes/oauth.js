@@ -1,6 +1,6 @@
-import express from 'express';
-import OAuth2Server from 'oauth2-server';
-import oauthModel from './../models/oauth.js';
+const express = require('express');
+const OAuth2Server = require('oauth2-server');
+const oauthModel = require('./../models/oauth.js');
 
 const Request = OAuth2Server.Request;
 const Response = OAuth2Server.Response;
@@ -30,4 +30,4 @@ router.post('/loginToken.php', (req, res, next) => {
         });
 });
 
-export default router;
+module.exports = router;

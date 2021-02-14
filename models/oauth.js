@@ -1,4 +1,4 @@
-import  mysql from 'mysql';
+const mysql = require('mysql');
 
 const connection = mysql.createConnection({
   host     : process.env.DB_HOST,
@@ -12,6 +12,7 @@ connection.connect(function(err) {
     console.error('error connecting: ' + err.stack);
     return;
   }
+  console.log('connected as id ' + connection.threadId);
 });
 
 const model = {
@@ -94,4 +95,4 @@ const model = {
   }  
 };
 
-export default model;
+module.exports = model;

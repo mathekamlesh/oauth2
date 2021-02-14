@@ -1,7 +1,9 @@
 import { promises as fs } from 'fs';
 import dateFormat from 'dateformat';
+import os from 'os';
+import {v4 as uuid } from 'uuid'
 
-module.export = () => {
+const Logger = () => {
     
     const loggerFile = process.env.LOGGER_FILE_PATH;
     /**
@@ -37,13 +39,26 @@ module.export = () => {
      */
     const DEBUG = 7;
 
-    const LOG_LEVELS = [URGENT];
+    const LOG_LEVELS = {
+        URGENT: 'URGENT',
+        ALERT: 'ALERT',
+        CRITICAL: 'CRITICAL',
+        ERROR: 'ERROR',
+        WARNING: 'WARNING',
+        NOTICE: 'NOTICE',
+        INFO: 'INFO',
+        DEBUG: 'DEBUG'
+    };
 
-    const log = (logLevel,logData) => {
+    const requestData;
+    const log = (logData, logLevel = INFO) => {
+        
+
+
         return new Promise((resolve, reject) => {
             const logFormatedData = {
                 log_time:"",
-                level:"CRITICAL",
+                level:logLevel,
                 log_message:"config",
                 description:"",
                 url:"",
@@ -53,4 +68,16 @@ module.export = () => {
             }
         })
     }
+
+    const LoggerInit = (req, res, next)=>{
+        requestData.refererUid = req.query.refererUid;
+        requestData.url = req.protocol + "://" + req.get('host') + req.originalUrl;
+        requestData.log_host = os.hostname();
+        requestData.requestId = os.hostname();
+    }
 }
+
+
+
+exports.Logger = Logger;
+
